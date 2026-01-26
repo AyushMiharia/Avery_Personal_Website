@@ -19,4 +19,3 @@ Open `index.html` in your browser to view the website.
 
 ## Deployment
 
-Deploy on Vercel or any other platform that supports Next.js.
