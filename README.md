@@ -14,9 +14,7 @@ Open `index.html` in your browser to view the website.
 
 ## Features
 
-- Built with Next.js 15
-- TypeScript for type safety
-- Tailwind CSS for styling
+- Prettier for code styling
 - ESLint for code quality
 
 ## Deployment
