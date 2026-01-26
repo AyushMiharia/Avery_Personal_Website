@@ -74,6 +74,14 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   position: relative;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
 }
 
 body::before {
@@ -102,7 +110,9 @@ body::before {
   z-index: 0;
   pointer-events: none;
 }
-
+main {
+  text-align: center;
+}
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -129,7 +139,7 @@ header {
 
 nav {
   display: flex;
-  gap: 2rem;
+  gap: 4rem;
 }
 
 nav a {
@@ -163,7 +173,7 @@ nav a.active::after {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 4rem 0;
+
 }
 
 .greeting {
@@ -396,23 +406,120 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.social-links {
-  display: flex;
-  justify-content: center;
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
-.social-links a {
-  color: var(--light);
-  font-size: 1.5rem;
+.content-section {
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.05),
+    rgba(20, 184, 166, 0.05)
+  );
+  backdrop-filter: blur(10px);
+  padding: 3rem;
+  border-radius: 20px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
   transition: all 0.3s ease;
 }
 
-.social-links a:hover {
+.content-section:hover {
+  border-color: rgba(20, 184, 166, 0.4);
+  box-shadow: 0 12px 32px rgba(168, 85, 247, 0.2);
+}
+
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+  margin-top: 2rem;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    var(--primary),
+    var(--accent),
+    var(--teal-light)
+  );
+  box-shadow: 0 0 10px rgba(20, 184, 166, 0.5);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 2rem;
+  padding-left: 1.5rem;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -2.5rem;
+  top: 0.5rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--teal-light));
+  box-shadow:
+    0 0 0 4px rgba(20, 184, 166, 0.2),
+    0 0 20px rgba(20, 184, 166, 0.6);
+}
+
+.timeline-item h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: var(--light);
+}
+
+.timeline-item .date {
   color: var(--accent);
-  transform: translateY(-3px);
-  filter: drop-shadow(0 0 10px rgba(20, 184, 166, 0.6));
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px rgba(20, 184, 166, 0.3);
+}
+
+.interests {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.interest-item {
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.1),
+    rgba(20, 184, 166, 0.1)
+  );
+  padding: 1.5rem;
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.interest-item:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(168, 85, 247, 0.2),
+    rgba(20, 184, 166, 0.2)
+  );
+  transform: translateY(-5px);
+  border-color: rgba(20, 184, 166, 0.4);
+  box-shadow: 0 8px 24px rgba(20, 184, 166, 0.3);
+}
+
+.interest-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 @keyframes fadeInUp {

@@ -32,4 +32,28 @@ document.querySelectorAll("section").forEach((section) => {
   section.style.transition = "opacity 0.6s ease, transform 0.6s ease";
   observer.observe(section);
 });
-console.log("Welcome to my personal website!");
+
+// Add active nav link on scroll
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll("nav a");
+
+const updateActiveNav = () => {
+  const scrollY = window.pageYOffset;
+
+  sections.forEach((section) => {
+    const sectionHeight = section.offsetHeight;
+    const sectionTop = section.offsetTop - 100;
+    const sectionId = section.getAttribute("id");
+
+    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === `#${sectionId}`) {
+          link.classList.add("active");
+        }
+      });
+    }
+  });
+};
+
+window.addEventListener("scroll", updateActiveNav);

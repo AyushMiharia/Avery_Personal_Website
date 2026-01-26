@@ -18,4 +18,7 @@ Open `index.html` in your browser to view the website.
 - ESLint for code quality
 
 ## Deployment
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2ccece5 (finalizing content and css)
