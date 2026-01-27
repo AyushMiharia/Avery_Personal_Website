@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alison Avery - Fun Zone</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo"><a href="./index.html">AA</a></div>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="./work.html">Work</a>
+          <a href="fun.html" class="active">Fun Zone</a>
+        </nav>
+      </header>
+
+      <section class="fun-hero">
+        <h1>🎮 Fun Zone</h1>
+        <p class="subtitle">Take a break and play some games!</p>
+      </section>
+
+      <div class="games-grid">
+        <!-- Tic Tac Toe -->
+        <div class="game-card">
+          <h2>❌⭕ Tic Tac Toe</h2>
+          <div class="game-container">
+            <div id="tic-tac-toe-board"></div>
+            <div class="game-status" id="ttt-status">Your turn (X)</div>
+            <button class="btn" onclick="resetTicTacToe()">New Game</button>
+          </div>
+        </div>
+
+        <!-- Number Guessing Game -->
+        <div class="game-card">
+          <h2>🎯 Number Guessing</h2>
+          <div class="game-container">
+            <p style="text-align: center; color: #94a3b8">
+              Guess a number between 1 and 100
+            </p>
+            <input
+              type="number"
+              id="number-guess-input"
+              placeholder="Enter your guess..."
+              min="1"
+              max="100"
+            />
+            <button class="btn" onclick="checkGuess()">Submit Guess</button>
+            <div class="game-status" id="guess-status"></div>
+            <div class="attempts" id="attempts-count">Attempts: 0</div>
+            <button class="btn" onclick="resetNumberGame()">New Game</button>
+          </div>
+        </div>
+
+        <!-- Color Memory Game -->
+        <div class="game-card">
+          <h2>🎨 Color Memory</h2>
+          <div class="game-container">
+            <div class="score" id="memory-score">Matches: 0 / 8</div>
+            <div id="color-memory-grid"></div>
+            <div class="game-status" id="memory-status">
+              Find matching pairs!
+            </div>
+            <button class="btn" onclick="resetMemoryGame()">New Game</button>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <p>
+          &copy; 2026 Alison S. Avery. MIT License.
+        </p>
+      </footer>
+    </div>
+
+    <script type="module">
+      // Tic Tac Toe Game
+      let tttBoard = ["", "", "", "", "", "", "", "", ""];
+      let tttCurrentPlayer = "X";
+      let tttGameActive = true;
+
+      function initTicTacToe() {
+        const board = document.getElementById("tic-tac-toe-board");
+        board.innerHTML = "";
+        tttBoard.forEach((cell, index) => {
+          const cellDiv = document.createElement("div");
+          cellDiv.className = "cell";
+          cellDiv.textContent = cell;
+          cellDiv.onclick = () => makeMove(index);
+          board.appendChild(cellDiv);
+        });
+      }
+
+      function makeMove(index) {
+        if (tttBoard[index] === "" && tttGameActive) {
+          tttBoard[index] = tttCurrentPlayer;
+          updateTicTacToeBoard();
+
+          if (checkWinner()) {
+            document.getElementById("ttt-status").textContent =
+              `${tttCurrentPlayer} wins! 🎉`;
+            tttGameActive = false;
+          } else if (!tttBoard.includes("")) {
+            document.getElementById("ttt-status").textContent =
+              "It's a draw! 🤝";
+            tttGameActive = false;
+          } else {
+            tttCurrentPlayer = tttCurrentPlayer === "X" ? "O" : "X";
+            document.getElementById("ttt-status").textContent =
+              `Your turn (${tttCurrentPlayer})`;
+          }
+        }
+      }
+
+      function checkWinner() {
+        const winPatterns = [
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8],
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8],
+          [0, 4, 8],
+          [2, 4, 6],
+        ];
+
+        return winPatterns.some((pattern) => {
+          const [a, b, c] = pattern;
+          return (
+            tttBoard[a] &&
+            tttBoard[a] === tttBoard[b] &&
+            tttBoard[a] === tttBoard[c]
+          );
+        });
+      }
+
+      function updateTicTacToeBoard() {
+        const cells = document.querySelectorAll("#tic-tac-toe-board .cell");
+        cells.forEach((cell, index) => {
+          cell.textContent = tttBoard[index];
+          if (tttBoard[index]) {
+            cell.classList.add("taken");
+          }
+        });
+      }
+
+      window.resetTicTacToe = function () {
+        tttBoard = ["", "", "", "", "", "", "", "", ""];
+        tttCurrentPlayer = "X";
+        tttGameActive = true;
+        document.getElementById("ttt-status").textContent = "Your turn (X)";
+        initTicTacToe();
+      };
+
+      // Number Guessing Game
+      let targetNumber = Math.floor(Math.random() * 100) + 1;
+      let attempts = 0;
+
+      window.checkGuess = function () {
+        const input = document.getElementById("number-guess-input");
+        const guess = parseInt(input.value);
+        const status = document.getElementById("guess-status");
+
+        if (!guess || guess < 1 || guess > 100) {
+          status.textContent = "Please enter a valid number between 1 and 100";
+          return;
+        }
+
+        attempts++;
+        document.getElementById("attempts-count").textContent =
+          `Attempts: ${attempts}`;
+
+        if (guess === targetNumber) {
+          status.textContent = `🎉 Correct! You got it in ${attempts} attempts!`;
+          input.disabled = true;
+        } else if (guess < targetNumber) {
+          status.textContent = "📈 Higher! Try a bigger number.";
+        } else {
+          status.textContent = "📉 Lower! Try a smaller number.";
+        }
+
+        input.value = "";
+      };
+
+      window.resetNumberGame = function () {
+        targetNumber = Math.floor(Math.random() * 100) + 1;
+        attempts = 0;
+        document.getElementById("attempts-count").textContent = "Attempts: 0";
+        document.getElementById("guess-status").textContent = "";
+        const input = document.getElementById("number-guess-input");
+        input.value = "";
+        input.disabled = false;
+      };
+
+      document
+        .getElementById("number-guess-input")
+        .addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            checkGuess();
+          }
+        });
+
+      // Color Memory Game
+      const colors = [
+        "#a855f7",
+        "#14b8a6",
+        "#ec4899",
+        "#f59e0b",
+        "#ef4444",
+        "#10b981",
+        "#3b82f6",
+        "#8b5cf6",
+      ];
+      let memoryCards = [...colors, ...colors].sort(() => Math.random() - 0.5);
+      let flippedCards = [];
+      let matchedPairs = 0;
+
+      function initMemoryGame() {
+        const grid = document.getElementById("color-memory-grid");
+        grid.innerHTML = "";
+        memoryCards.forEach((color, index) => {
+          const cell = document.createElement("div");
+          cell.className = "memory-cell";
+          cell.dataset.color = color;
+          cell.dataset.index = index;
+          cell.onclick = () => flipCard(cell);
+          grid.appendChild(cell);
+        });
+      }
+
+      function flipCard(cell) {
+        if (flippedCards.length < 2 && !cell.classList.contains("flipped")) {
+          cell.style.background = cell.dataset.color;
+          cell.classList.add("flipped");
+          flippedCards.push(cell);
+
+          if (flippedCards.length === 2) {
+            setTimeout(checkMatch, 500);
+          }
+        }
+      }
+
+      function checkMatch() {
+        const [card1, card2] = flippedCards;
+
+        if (card1.dataset.color === card2.dataset.color) {
+          matchedPairs++;
+          document.getElementById("memory-score").textContent =
+            `Matches: ${matchedPairs} / 8`;
+
+          if (matchedPairs === 8) {
+            document.getElementById("memory-status").textContent =
+              "🎉 You won! All pairs matched!";
+          }
+        } else {
+          card1.style.background =
+            "linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(20, 184, 166, 0.2))";
+          card2.style.background =
+            "linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(20, 184, 166, 0.2))";
+          card1.classList.remove("flipped");
+          card2.classList.remove("flipped");
+        }
+
+        flippedCards = [];
+      }
+
+      window.resetMemoryGame = function () {
+        memoryCards = [...colors, ...colors].sort(() => Math.random() - 0.5);
+        flippedCards = [];
+        matchedPairs = 0;
+        document.getElementById("memory-score").textContent = "Matches: 0 / 8";
+        document.getElementById("memory-status").textContent =
+          "Find matching pairs!";
+        initMemoryGame();
+      };
+
+      // Initialize all games
+      initTicTacToe();
+      initMemoryGame();
+    </script>
+  </body>
+</html>

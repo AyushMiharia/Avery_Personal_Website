@@ -69,7 +69,7 @@ Then navigate to `http://localhost:8000` (or the port shown)
 - **No Dependencies**: Built entirely with vanilla JavaScript - no frameworks or libraries required
 - **ES6+ JavaScript**: Modern JavaScript features including modules, arrow functions, and Intersection Observer API
 
-## 🛠️ Technical Details
+## Technical Details
 
 ### Technologies Used
 
@@ -101,7 +101,7 @@ Then navigate to `http://localhost:8000` (or the port shown)
 - Mobile-first approach with media queries
 - Breakpoint at 768px for mobile devices
 
-## 📝 Code Quality
+## Code Quality
 
 - **Clean Separation**: HTML, CSS, and JavaScript in separate files
 - **Semantic HTML**: Proper use of semantic elements
@@ -113,26 +113,26 @@ Then navigate to `http://localhost:8000` (or the port shown)
 
 ## License
 
-This project is open source and available for personal and commercial use.
+MIT License
 
-## Contributing
 
-Feel free to fork this project and customize it for your own portfolio!
-
-## Contact
-
-- **Email**: john@example.com
-- **LinkedIn**: [Your LinkedIn](https://linkedin.com)
-- **GitHub**: [Your GitHub](https://github.com)
-- **Portfolio**: [Your Website](https://yourwebsite.com)
-
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Design inspiration from modern web trends
 - Color palette: Purple and Teal gradient theme
-- Icons: Unicode emoji characters
 - Fonts: System fonts for optimal performance
+- **AI Development**: This portfolio was created with assistance from Claude (Anthropic)
+### About This Project's Creation
 
+This portfolio website was developed through an iterative collaboration between a human developer (Alison Avery) and Claude AI. The process included:
+
+- **Initial Design**: Initial design concepts are based on viewing different professional portfolio websites.
+- **Color Scheme**: Custom purple and teal gradient theme developed through conversation with Claude AI.
+- **Code Organization**: Structured into clean, separate HTML, CSS, and JavaScript files
+- **Feature Implementation**: Smooth scrolling, animations, and responsive design
+- **Documentation**: AI provided outline for a comprehensive README 
+- **Fun Zone Page**: AI generated page that had minor updates to reflect the rest of the project. 
 ---
 
 **Built with 💜 and vanilla JavaScript**
+**Created with 🤖 AI assistance from Claude**
