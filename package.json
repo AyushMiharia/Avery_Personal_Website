@@ -1,4 +1,18 @@
 {
+  "name": "avery_personal_website",
+  "version": "1.0.0",
+  "description": "Personal website for Alison Avery",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "author": "Alison Avery",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aavery0506/Avery_Personal_Website.git"
+  },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
     "eslint": "^9.39.2",
